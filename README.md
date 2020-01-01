@@ -8,6 +8,8 @@ Idk. I need help. It is January 1st. What am I doing with my life?
 
 ### Commands
 
+Every .bro file needs a trailing \n
+
 | Command                               | Meaning                                                      |
 | :------------------------------------ | :----------------------------------------------------------- |
 | `bro Bro`                             | increment the byte at the current pointer                    |

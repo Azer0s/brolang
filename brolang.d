@@ -7,6 +7,7 @@ import std.conv : to;
 import std.stdio;
 import std.array;
 import std.string;
+import std.regex;
 
 private string bfToD(string code) {
     return "import std; void main() { ubyte[30000] field; size_t ptr;"
@@ -31,6 +32,8 @@ private string bfToD(string code) {
 }
 
 private string broToBf(string code) {
+    auto re = regex(r"\n|\t|\r","g");
+    code = replaceAll(code, re, "");
     const string[] tokens = code.split(" ");
     int buffer = 0;
     string output = "";
@@ -44,7 +47,7 @@ private string broToBf(string code) {
                     output ~= "+";
                     break;
                     case 2:
-                    output ~="-";
+                    output ~= "-";
                     break;
                     case 3:
                     output ~= "[";
@@ -70,10 +73,7 @@ private string broToBf(string code) {
             break;
             case "": break;
             case " ": break;
-            case "\n": break;
-            case "\t": break;
-            case "\r": break;
-            default: writeln(t); throw new StringException("Invalid command " ~ t ~ ", bro!");
+            default: throw new StringException("Invalid command " ~ t ~ ", bro!");
         }
     }
 
@@ -81,6 +81,15 @@ private string broToBf(string code) {
 }
 
 void main() {
-    const string code = stdin.readln();
+    string code = "";
+    string lastIn = "";
+
+    auto ctr = ctRegex!("bro|Bro");
+
+    do {
+        lastIn = stdin.readln();
+        code ~= lastIn;
+    } while (!matchFirst(lastIn, ctr).empty);
+
     writeln(bfToD(broToBf(code)));
 }
