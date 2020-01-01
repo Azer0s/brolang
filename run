@@ -1,0 +1,7 @@
+#!/bin/sh
+./bin/brolang < $@ > out.d
+dmd out.d
+rm out.d
+./out
+rm out
+rm out.o
