@@ -56,4 +56,4 @@ Every .bro file needs a trailing \n
 
 `mandelbro.bro` - Mandelbrot set
 
-`fibonacci.bro` - Fibonacci sequence
+`fibronacci.bro` - Fibonacci sequence
