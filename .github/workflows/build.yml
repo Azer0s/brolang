@@ -13,6 +13,7 @@ jobs:
       run: sudo snap install dmd --classic
     - name: Build brolang
       run: |
+        sudo chown root:root /
         make brolang
         chmod +x run
     - name: Run examples
