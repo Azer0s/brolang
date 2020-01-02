@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
-      run: snap install dmd --classic
+      run: sudo snap install dmd --classic
     - name: Build brolang
       run: |
         make brolang
