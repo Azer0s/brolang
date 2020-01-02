@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: snap install dmd --classic
+    - name: Build brolang
+      run: |
+        make brolang
+        chmod +x run
+    - name: Run examples
+      run: |
+        ./run examples/hello.bro
+        ./run examples/fibronacci.bro
+        ./run examples/mandelbro.bro
