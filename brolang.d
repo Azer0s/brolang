@@ -56,11 +56,6 @@ ldptrv d_ptr
 store count
 ";
 
-    for(int c = 1; c < 30_000; c++){
-        psph ~= "
-v_uint8 d" ~ to!string(c);
-    }
-
     foreach (token; code.stride(1))
     {
         switch (token)
@@ -81,6 +76,8 @@ store [d_ptr]";
         case '[':
 
             psph ~= "
+ldu8v [d_ptr]
+jmpf exit_loop_" ~ to!string(labelCount) ~ "
 golbl_" ~ to!string(labelCount) ~ ":";
             labelStack ~= labelCount;
             labelCount++;
@@ -90,7 +87,8 @@ golbl_" ~ to!string(labelCount) ~ ":";
             labelStack.popBack();
             psph ~= "
 ldu8v [d_ptr]
-jmpt golbl_" ~ to!string(labelNum);
+jmpt golbl_" ~ to!string(labelNum) ~ "
+exit_loop_" ~ to!string(labelNum) ~ ":";
             break;
         case ',':
             psph ~= "
@@ -113,7 +111,20 @@ store d_ptr";
             psph ~= "
 ldptrv d_ptr
 inc
-store d_ptr";
+store d_ptr
+jmp skp_" ~ to!string(i) ~ "
+dcl_" ~ to!string(i) ~ ":
+    v_uint8 data" ~ to!string(i) ~ "
+    ldi32v count
+    inc
+    store count
+    jmp exit_" ~ to!string(i) ~ "
+skp_" ~ to!string(i) ~ ":
+ldptrv d_ptr
+ldi32v count
+gt
+jmpt dcl_" ~ to!string(i) ~ " 
+exit_" ~ to!string(i) ~ ":";
             break;
         default:
             psph ~= "";
@@ -198,6 +209,8 @@ void main(string[] args)
 
     if(args[1] == "d") {
         writeln(bfToD(broToBf(code)));
+    } else if(args[1] == "bf2d") {
+        writeln(bfToD(code));
     } else if(args[1] == "psph") {
         writeln(bfToPsph(broToBf(code)));
     } else if(args[1] == "bf2psph") {
