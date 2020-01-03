@@ -6,6 +6,8 @@ This meme went way too far.
 
 Idk. I need help. It is January 1st. What am I doing with my life?
 
+![](https://i.redd.it/1zrqq62xu5r21.jpg)
+
 ### Hello world
 
 ```bro
@@ -82,4 +84,4 @@ Every .bro file needs a trailing \n
 
 `mandelbro.bro` - Mandelbrot set
 
-`fibonacci.bro` - Fibonacci sequence
+`fibronacci.bro` - Fibonacci sequence
