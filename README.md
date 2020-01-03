@@ -48,6 +48,34 @@ Every .bro file needs a trailing \n
 ./run path/to/brofile
 ```
 
+### Transpile a bro file
+
+#### To D
+
+```bash
+./bin/brolang d < path/to/brofile
+```
+
+#### To Persephone
+
+```bash
+./bin/brolang psph < path/to/brofile
+```
+
+### Transpile brainfuck
+
+#### To Persephone
+
+```bash
+./bin/brolang bf2psph < path/to/bffile
+```
+
+#### To D
+
+```bash
+./bin/brolang bf2d < path/to/bffile
+```
+
 ### Examples
 
 `hello.bro` - Hello world

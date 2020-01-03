@@ -1,5 +1,5 @@
 #!/bin/sh
-./bin/brolang < $@ > out.d
+./bin/brolang d < $@ > out.d
 dmd out.d
 rm out.d
 ./out
