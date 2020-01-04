@@ -1,6 +1,6 @@
 ## brolang - the brogramming language for real bros
 
-This meme went way too far.
+This [meme](https://youtu.be/OVoFzu-vH4o) went way too far.
 
 ### Why???
 
